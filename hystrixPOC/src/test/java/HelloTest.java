@@ -1,10 +1,5 @@
-import com.netflix.hystrix.HystrixCommandProperties;
-import org.junit.Test;
-import rx.Observable;
-import rx.Observer;
-import rx.functions.Action1;
 
-import java.util.concurrent.Future;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
