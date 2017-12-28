@@ -11,7 +11,7 @@ public class DeveloperController extends HystrixCommand<String> {
     public DeveloperController() {
         super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"))
                 .andCommandPropertiesDefaults(HystrixCommandProperties.Setter()
-                        .withExecutionTimeoutInMilliseconds(10000)));
+                        .withExecutionTimeoutInMilliseconds(5000)));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DeveloperController extends HystrixCommand<String> {
 
     @Override
     public String getFallback(){
-        return "Hello teste";
+        return "Hello Erro";
     }
 
 }
