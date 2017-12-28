@@ -19,19 +19,17 @@ public class CommandHelloWorld extends HystrixCommand<String> {
 
     @Override
     protected String run() {
-
-
         try {
             Thread.sleep(1900);
         } catch (InterruptedException e) {
-
+            System.out.println("Sleep error");
         }
         return "Hello " + name + "!";
     }
 
     @Override
     public String getFallback(){
-        return "Hello teste";
+        return "Hello test";
     }
 
 
