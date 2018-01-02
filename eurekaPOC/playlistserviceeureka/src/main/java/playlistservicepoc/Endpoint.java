@@ -28,7 +28,7 @@ public class Endpoint {
     @RequestMapping(value = "/",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PlaylistModel> getAllPlaylistModels() {
+    public List<PlaylistModel> getAllPlaylistModels() throws IOException {
         return playlistDAO.getPlaylistModels();
     }
 
