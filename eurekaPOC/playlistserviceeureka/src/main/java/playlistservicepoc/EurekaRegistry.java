@@ -44,7 +44,7 @@ public class EurekaRegistry implements ApplicationListener<ApplicationReadyEvent
                 "       \"name\": \""+dataCenterName+"\"" +
                 " }}}") ;
 
-        Request request2 = new Request.Builder().url("http://localhost:8080/eureka/v2/apps/playlistservice").post(body).build() ;
+        Request request2 = new Request.Builder().url("http://localhost:8080/eureka/v2/apps/"+appName).post(body).build() ;
         client.newCall(request2).execute() ;
     }
 
