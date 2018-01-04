@@ -1,5 +1,6 @@
 package playlistservicepoc;
 
+import org.codehaus.jettison.json.JSONException;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -43,7 +44,7 @@ public class Endpoint {
     @RequestMapping(value = "/full/{playListName}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MusicModel> getFullPlaylist(@PathVariable(value = "playListName") String playListName) throws IOException, ParseException {
+    public List<MusicModel> getFullPlaylist(@PathVariable(value = "playListName") String playListName) throws IOException, ParseException, JSONException {
         return playlistService.findAllMusics(playListName);
     }
 

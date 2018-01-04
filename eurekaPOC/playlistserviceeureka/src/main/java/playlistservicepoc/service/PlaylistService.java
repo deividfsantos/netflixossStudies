@@ -1,11 +1,13 @@
 package playlistservicepoc.service;
 
+import org.codehaus.jettison.json.JSONException;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import playlistservicepoc.Connector;
+import playlistservicepoc.eureka.Connector;
 import playlistservicepoc.dao.PlaylistDAO;
+import playlistservicepoc.eureka.EurekaDiscovery;
+import playlistservicepoc.eureka.EurekaModelDiscover;
 import playlistservicepoc.model.MusicModel;
 import playlistservicepoc.model.PlaylistModel;
 
@@ -21,7 +23,9 @@ public class PlaylistService {
     @Autowired
     private PlaylistDAO playlistDAO;
 
-    public List<MusicModel> findAllMusics(String name) throws IOException, ParseException {
+    private EurekaDiscovery eurekaDiscovery = new EurekaDiscovery();
+
+    public List<MusicModel> findAllMusics(String name) throws IOException, ParseException, JSONException {
 
         PlaylistModel playlistModel = playlistDAO.getPlayListByName(name);
         List<MusicModel> musicModels = new ArrayList<>();
@@ -33,8 +37,12 @@ public class PlaylistService {
         return musicModels;
     }
 
-    public MusicModel findAllMusicsOnPlaylist(int musicId) throws IOException, ParseException {
-        return connector.run("http://localhost:9000/music/v1/"+musicId);
+    public MusicModel findAllMusicsOnPlaylist(int musicId) throws IOException, ParseException, JSONException {
+
+        List<EurekaModelDiscover> eurekaModelDiscoverList = eurekaDiscovery.getUrlFromMusicService();
+        String url = eurekaModelDiscoverList.get(0).getIpAddr()+":"+eurekaModelDiscoverList.get(0).getPort();
+
+        return connector.run("http://"+url+ "/music/v1/" + musicId);
     }
 
 

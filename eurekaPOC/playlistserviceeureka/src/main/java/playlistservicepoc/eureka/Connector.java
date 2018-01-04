@@ -1,4 +1,4 @@
-package playlistservicepoc;
+package playlistservicepoc.eureka;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,7 +30,7 @@ public class Connector {
         Gson gson = new GsonBuilder().create();
         MusicModel musicModel = new MusicModel();
 
-        return musicModel = gson.fromJson(jsonString,MusicModel.class);
+        return musicModel = gson.fromJson(jsonString, MusicModel.class);
     }
 
 }

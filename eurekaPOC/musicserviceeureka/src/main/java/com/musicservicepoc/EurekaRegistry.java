@@ -17,7 +17,7 @@ public class EurekaRegistry implements ApplicationListener<ApplicationReadyEvent
     private String ipAddr = "127.0.0.1";
     private String status = "UP";
     private int port = 9000;
-    private String healthCheckUrl = "http://localhost:9000/music/v1/";
+    private String healthCheckUrl = "http://localhost:9000/healthcheck";
     private String statusPageUrl = "http://localhost:9000/music/v1/";
     private String homePageUrl = "http://localhost:9000/music/v1/";
     private String dataCenterInfo = "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo";
