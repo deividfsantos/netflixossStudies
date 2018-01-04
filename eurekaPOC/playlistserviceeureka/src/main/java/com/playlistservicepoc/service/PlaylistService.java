@@ -1,15 +1,15 @@
-package playlistservicepoc.service;
+package com.playlistservicepoc.service;
 
+import com.playlistservicepoc.dao.PlaylistDAO;
+import com.playlistservicepoc.eureka.EurekaDiscovery;
+import com.playlistservicepoc.eureka.EurekaModelDiscover;
+import com.playlistservicepoc.model.PlaylistModel;
 import org.codehaus.jettison.json.JSONException;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import playlistservicepoc.eureka.Connector;
-import playlistservicepoc.dao.PlaylistDAO;
-import playlistservicepoc.eureka.EurekaDiscovery;
-import playlistservicepoc.eureka.EurekaModelDiscover;
-import playlistservicepoc.model.MusicModel;
-import playlistservicepoc.model.PlaylistModel;
+import com.playlistservicepoc.eureka.Connector;
+import com.playlistservicepoc.model.MusicModel;
 
 import java.io.IOException;
 import java.util.ArrayList;

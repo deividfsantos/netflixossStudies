@@ -1,4 +1,4 @@
-package playlistservicepoc.model;
+package com.playlistservicepoc.model;
 
 public class MusicModel {
 

@@ -1,4 +1,4 @@
-package playlistservicepoc.eureka;
+package com.playlistservicepoc.eureka;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

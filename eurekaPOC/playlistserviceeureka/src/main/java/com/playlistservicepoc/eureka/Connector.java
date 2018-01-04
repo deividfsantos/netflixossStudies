@@ -1,10 +1,10 @@
-package playlistservicepoc.eureka;
+package com.playlistservicepoc.eureka;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.playlistservicepoc.model.MusicModel;
 import okhttp3.*;
 import org.json.simple.parser.ParseException;
-import playlistservicepoc.model.MusicModel;
 
 import java.io.IOException;
 

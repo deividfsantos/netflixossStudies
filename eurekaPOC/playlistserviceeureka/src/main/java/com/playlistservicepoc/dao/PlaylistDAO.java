@@ -1,7 +1,7 @@
-package playlistservicepoc.dao;
+package com.playlistservicepoc.dao;
 
+import com.playlistservicepoc.model.PlaylistModel;
 import org.springframework.stereotype.Repository;
-import playlistservicepoc.model.PlaylistModel;
 
 import java.util.ArrayList;
 import java.util.List;

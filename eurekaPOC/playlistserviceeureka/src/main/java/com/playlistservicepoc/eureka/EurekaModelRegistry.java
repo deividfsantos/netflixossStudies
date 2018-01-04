@@ -1,17 +1,17 @@
-package playlistservicepoc.eureka;
+package com.playlistservicepoc.eureka;
 
 public class EurekaModelRegistry {
 
     private String hostName = "playlist";
-    private String appName =  "playlist-service";
-    private String vipAddress =   "com.gabrielspassos.poc";
-    private String secureVipAddress =  "com.gabrielspassos.poc";
+    private String appName = "playlistservice";
+    private String vipAddress =  "com.playlistservicepoc";
+    private String secureVipAddress =  "com.playlistservicepoc";
     private String ipAddr = "127.0.0.1";
     private String status = "UP";
     private int port = 9001;
-    private String healthCheckUrl = "http://localhost:9001/playlist";
-    private String statusPageUrl = "http://localhost:9001/playlist";
-    private String homePageUrl = "http://localhost:9001/playlist";
+    private String healthCheckUrl = "http://localhost:9001/health";
+    private String statusPageUrl = "http://localhost:9001/health";
+    private String homePageUrl = "http://localhost:9001/playlist/v1/";
     private String dataCenterInfo = "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo";
     private String dataCenterName = "MyOwn";
 

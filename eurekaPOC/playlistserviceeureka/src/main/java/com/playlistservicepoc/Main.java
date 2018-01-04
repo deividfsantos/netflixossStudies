@@ -1,4 +1,4 @@
-package playlistservicepoc;
+package com.playlistservicepoc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

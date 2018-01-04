@@ -1,4 +1,4 @@
-package playlistservicepoc.model;
+package com.playlistservicepoc.model;
 
 import java.util.List;
 
