@@ -1,19 +1,25 @@
 package com.musicservicepoc.eureka;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class EurekaModelRegistry {
 
     private String hostName = "music";
     private String appName =  "musicService";
     private String vipAddress =   "com.musicservicepoc";
     private String secureVipAddress =  "com.musicservicepoc";
-    private String ipAddr = "127.0.0.1";
+    private String ipAddr = InetAddress.getLocalHost().getCanonicalHostName().toString();
     private String status = "UP";
     private int port = 9000;
-    private String healthCheckUrl = "http://localhost:9000/healthcheck";
-    private String statusPageUrl = "http://localhost:9000/music/v1/";
-    private String homePageUrl = "http://localhost:9000/music/v1/";
+    private String healthCheckUrl = "http://"+ InetAddress.getLocalHost().getHostName()+":9000/healthcheck";
+    private String statusPageUrl = "http://"+ InetAddress.getLocalHost().getHostName()+":9000/music/v1/";
+    private String homePageUrl = "http://"+ InetAddress.getLocalHost().getHostName()+":9000/music/v1/";
     private String dataCenterInfo = "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo";
     private String dataCenterName = "MyOwn";
+
+    public EurekaModelRegistry() throws UnknownHostException {
+    }
 
     public String getHostName() {
         return hostName;

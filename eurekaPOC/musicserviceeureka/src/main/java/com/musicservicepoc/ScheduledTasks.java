@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,6 +25,9 @@ public class ScheduledTasks {
     EurekaModelRegistry eurekaModelRegistry = new EurekaModelRegistry();
     OkHttpClient client = new OkHttpClient();
 
+    public ScheduledTasks() throws UnknownHostException {
+    }
+
     @Scheduled(fixedRate = 2000)
     public void reportCurrentTime() throws IOException {
 
@@ -34,7 +38,6 @@ public class ScheduledTasks {
         client.newCall(request).execute();
 
         log.info("The time is now {}", dateFormat.format(new Date()));
-
 
     }
 }

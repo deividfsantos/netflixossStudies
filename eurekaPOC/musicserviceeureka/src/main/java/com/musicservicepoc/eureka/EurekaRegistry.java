@@ -10,12 +10,16 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 @Component
 public class EurekaRegistry implements ApplicationListener<ApplicationReadyEvent> {
 
     EurekaModelRegistry eurekaModelRegistry = new EurekaModelRegistry();
     OkHttpClient client = new OkHttpClient();
+
+    public EurekaRegistry() throws UnknownHostException {
+    }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
