@@ -1,4 +1,4 @@
-package com.playlistservicepoc;
+package com.playlistservicepoc.healthcheck;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
