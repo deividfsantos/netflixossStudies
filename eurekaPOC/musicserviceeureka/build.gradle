@@ -1,8 +1,26 @@
+apply plugin: 'org.springframework.boot'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
+    }
+}
+
+jar {
+    baseName = 'musicservice'
+    version =  '0.1.0'
+}
+
+group 'music-service-example'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
+
 
 repositories {
     mavenCentral()

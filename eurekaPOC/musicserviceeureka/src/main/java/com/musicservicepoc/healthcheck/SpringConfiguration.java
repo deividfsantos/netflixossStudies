@@ -1,4 +1,4 @@
-package com.musicservicepoc;
+package com.musicservicepoc.healthcheck;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
