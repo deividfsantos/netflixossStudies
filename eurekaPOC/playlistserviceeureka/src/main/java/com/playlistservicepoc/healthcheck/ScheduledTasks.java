@@ -34,6 +34,5 @@ public class ScheduledTasks {
 
         Request request = new Request.Builder().url("http://localhost:8080/eureka/v2/apps/playlistservice/"+eurekaModelRegistry.getHostName()).put(body).build() ;
         client.newCall(request).execute();
-        log.info("The time is now {}", dateFormat.format(new Date()));
     }
 }

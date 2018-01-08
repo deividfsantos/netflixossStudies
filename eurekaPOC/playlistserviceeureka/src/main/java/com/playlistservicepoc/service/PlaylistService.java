@@ -42,6 +42,7 @@ public class PlaylistService {
         List<EurekaModelDiscover> eurekaModelDiscoverList = eurekaDiscovery.getUrlFromMusicService();
         String url = eurekaModelDiscoverList.get(0).getIpAddr()+":"+eurekaModelDiscoverList.get(0).getPort();
 
+
         return connector.run("http://"+url+ "/music/v1/" + musicId);
     }
 
