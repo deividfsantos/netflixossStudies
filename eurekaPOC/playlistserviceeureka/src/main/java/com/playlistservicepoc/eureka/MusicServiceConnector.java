@@ -8,7 +8,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
-public class Connector {
+public class MusicServiceConnector {
 
     OkHttpClient client = new OkHttpClient();
 

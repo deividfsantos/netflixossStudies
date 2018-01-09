@@ -8,7 +8,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.playlistservicepoc.eureka.Connector;
+import com.playlistservicepoc.eureka.MusicServiceConnector;
 import com.playlistservicepoc.model.MusicModel;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class PlaylistService {
 
-    private Connector connector = new Connector();
+    private MusicServiceConnector musicServiceConnector = new MusicServiceConnector();
 
     @Autowired
     private PlaylistDAO playlistDAO;
@@ -43,7 +43,7 @@ public class PlaylistService {
         String url = eurekaModelDiscoverList.get(0).getIpAddr()+":"+eurekaModelDiscoverList.get(0).getPort();
 
 
-        return connector.run("http://"+url+ "/music/v1/" + musicId);
+        return musicServiceConnector.run("http://"+url+ "/music/v1/" + musicId);
     }
 
 
