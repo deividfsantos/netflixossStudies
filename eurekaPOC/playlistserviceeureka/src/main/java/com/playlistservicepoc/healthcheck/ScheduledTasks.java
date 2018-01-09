@@ -2,7 +2,6 @@ package com.playlistservicepoc.healthcheck;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import com.playlistservicepoc.eureka.EurekaModelRegistry;
 import okhttp3.MediaType;
