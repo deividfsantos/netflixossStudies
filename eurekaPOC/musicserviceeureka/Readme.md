@@ -12,4 +12,5 @@ Result: Return a JSON of music by ID
 
 ## Build
 ./gradlew clean build
+
 java -jar build/libs/musicservice-0.1.0.jar --server.port=[Choose a port]
