@@ -5,13 +5,13 @@
 
 ```
 [Method]: GET
-Endpoint: http://localhost:9000/musics/
+Endpoint: http://localhost:9000/music/v1/
 Result: Return a JSON of all Musics
 ```
 
 ```
 [Method]: GET
-Endpoint: http://localhost:9000/musics/[id of music]
+Endpoint: http://localhost:9000/music/v1/[id of music]
 Result: Return a JSON of music by ID
 ```
 
