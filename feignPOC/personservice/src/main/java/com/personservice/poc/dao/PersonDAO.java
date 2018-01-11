@@ -17,7 +17,6 @@ public class PersonDAO {
         personModels.add( new PersonModel(3,3,"Joao", 45));
         personModels.add( new PersonModel(4,4,"Daniel", 70));
         personModels.add( new PersonModel(5,3,"Daniel", 70));
-
     }
 
     public List<PersonModel> getPersonModels() {
