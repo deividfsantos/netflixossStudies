@@ -23,7 +23,7 @@ public class ScheduledTasks {
     public ScheduledTasks() throws UnknownHostException {
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 1000)
     public void reportCurrentTime() throws IOException {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json"),"");
