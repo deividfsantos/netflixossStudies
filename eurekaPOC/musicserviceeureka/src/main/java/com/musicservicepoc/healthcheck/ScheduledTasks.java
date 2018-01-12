@@ -18,7 +18,10 @@ public class ScheduledTasks {
     @Autowired
     EurekaModelRegistry eurekaModelRegistry;
 
-    OkHttpClient client = new OkHttpClient();
+    @Autowired
+    OkHttpClient client;
+
+    private final String url = "http://localhost:8080/eureka/v2/apps/musicservice/";
 
     public ScheduledTasks() throws UnknownHostException {
     }
@@ -28,7 +31,7 @@ public class ScheduledTasks {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json"),"");
 
-        Request request = new Request.Builder().url("http://localhost:8080/eureka/v2/apps/musicservice/"+eurekaModelRegistry.getHostName()).put(body).build() ;
+        Request request = new Request.Builder().url(url+eurekaModelRegistry.getHostName()).put(body).build() ;
         client.newCall(request).execute();
 
 

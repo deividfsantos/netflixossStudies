@@ -39,6 +39,7 @@ public class PlaylistDAO {
 
             if(playlist.getPlayListName().equalsIgnoreCase(name)) {
                 playlistModel = playlist;
+                break;
             }
 
         }

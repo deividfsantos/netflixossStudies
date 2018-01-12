@@ -1,19 +1,30 @@
-package com.playlistservicepoc.eureka;
+package com.playlistservicepoc.connector;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.playlistservicepoc.model.MusicModel;
 import okhttp3.*;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
 public class MusicServiceConnector {
 
-    OkHttpClient client = new OkHttpClient();
+    @Autowired
+    OkHttpClient client;
 
     public MusicModel run(String url) throws IOException, ParseException {
 
+        String jsonString = getJson(url);
+
+        Gson gson = new GsonBuilder().create();
+        MusicModel musicModel = new MusicModel();
+
+        return musicModel = gson.fromJson(jsonString, MusicModel.class);
+    }
+
+    private String getJson(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -25,12 +36,7 @@ public class MusicServiceConnector {
             e.printStackTrace();
         }
 
-        String jsonString = responses.body().string();
-
-        Gson gson = new GsonBuilder().create();
-        MusicModel musicModel = new MusicModel();
-
-        return musicModel = gson.fromJson(jsonString, MusicModel.class);
+        return responses.body().string();
     }
 
 }

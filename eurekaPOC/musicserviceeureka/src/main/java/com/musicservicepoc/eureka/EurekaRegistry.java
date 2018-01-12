@@ -18,15 +18,15 @@ import java.net.UnknownHostException;
 @Component
 public class EurekaRegistry implements ApplicationListener<ApplicationReadyEvent> {
 
-    @Autowired
-    EurekaModelRegistry eurekaModelRegistry;
+    private EurekaModelRegistry eurekaModelRegistry;
+    private WebApplicationContext webApplicationContext;
+    private OkHttpClient client;
+    private final String url = "http://localhost:8080/eureka/v2/apps/";
 
-    @Autowired
-    WebApplicationContext webApplicationContext;
-
-    OkHttpClient client = new OkHttpClient();
-
-    public EurekaRegistry() throws UnknownHostException {
+    public EurekaRegistry(EurekaModelRegistry eurekaModelRegistry, WebApplicationContext webApplicationContext, OkHttpClient okHttpClient) {
+        this.eurekaModelRegistry = eurekaModelRegistry;
+        this.webApplicationContext = webApplicationContext;
+        this.client = okHttpClient;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class EurekaRegistry implements ApplicationListener<ApplicationReadyEvent
                 "       \"name\": \""+ eurekaModelRegistry.getDataCenterName()+"\"" +
                 " }}}") ;
 
-        Request request2 = new Request.Builder().url("http://localhost:8080/eureka/v2/apps/"+ eurekaModelRegistry.getAppName()).post(body).build() ;
+        Request request2 = new Request.Builder().url(url+ eurekaModelRegistry.getAppName()).post(body).build() ;
         client.newCall(request2).execute() ;
     }
 

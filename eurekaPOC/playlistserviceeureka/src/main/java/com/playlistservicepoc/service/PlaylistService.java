@@ -8,7 +8,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.playlistservicepoc.eureka.MusicServiceConnector;
+import com.playlistservicepoc.connector.MusicServiceConnector;
 import com.playlistservicepoc.model.MusicModel;
 
 import java.io.IOException;
