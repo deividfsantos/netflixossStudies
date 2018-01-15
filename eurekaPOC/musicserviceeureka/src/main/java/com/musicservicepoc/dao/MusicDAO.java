@@ -9,9 +9,10 @@ import java.util.List;
 @Repository
 public class MusicDAO {
 
-    private final List<MusicModel> musicModels= new ArrayList<>();
+    private final List<MusicModel> musicModels;
 
     public MusicDAO() {
+        musicModels = new ArrayList<>();
         musicModels.add(new MusicModel(1, "Whole Lotta Love", "Led Zeppelin"));
         musicModels.add(new MusicModel(2, "Peace Sells", "Megadeth"));
         musicModels.add(new MusicModel(3, "Drink", "Alestorm"));
