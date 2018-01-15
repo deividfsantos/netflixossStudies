@@ -1,5 +1,6 @@
 package com.playlistservicepoc.dao;
 
+import com.playlistservicepoc.exception.APINotFoundException;
 import com.playlistservicepoc.model.PlaylistModel;
 import org.springframework.stereotype.Repository;
 
@@ -9,9 +10,10 @@ import java.util.List;
 @Repository
 public class PlaylistDAO {
 
-    private final List<PlaylistModel> playlistModels = new ArrayList<>();
+    private final List<PlaylistModel> playlistModels;
 
     public PlaylistDAO() {
+
         List<Integer> listMetal = new ArrayList<>();
         listMetal.add(2);
         listMetal.add(3);
@@ -23,6 +25,7 @@ public class PlaylistDAO {
         listRock.add(4);
         PlaylistModel playlistRockModel = new PlaylistModel(listRock, "rock");
 
+        playlistModels = new ArrayList<PlaylistModel>();
         playlistModels.add(playlistRockModel);
         playlistModels.add(playlistMetalModel);
     }
@@ -32,18 +35,11 @@ public class PlaylistDAO {
     }
 
     public PlaylistModel getPlayListByName(String name){
-
-        PlaylistModel playlistModel = new PlaylistModel();
-
-        for (PlaylistModel playlist: playlistModels) {
-
-            if(playlist.getPlayListName().equalsIgnoreCase(name)) {
-                playlistModel = playlist;
-                break;
-            }
-
-        }
-
-        return playlistModel;
+        return playlistModels.stream()
+                .filter(playlistModel -> playlistModel.getPlayListName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(APINotFoundException::new);
     }
+
+
 }

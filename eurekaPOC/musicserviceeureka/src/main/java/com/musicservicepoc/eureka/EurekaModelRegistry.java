@@ -1,5 +1,6 @@
 package com.musicservicepoc.eureka;
 
+import com.musicservicepoc.exception.NotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -10,16 +11,16 @@ import java.util.Random;
 @Component
 public class EurekaModelRegistry {
 
-    private final String hostName = "music"+getRandomNumber();
-    private String appName =  "musicservice";
-    private String vipAddress =   "com.musicservicepoc";
-    private String secureVipAddress =  "com.musicservicepoc";
+    private final String hostName = "music" + getRandomNumber();
+    private String appName = "musicservice";
+    private String vipAddress = "com.musicservicepoc";
+    private String secureVipAddress = "com.musicservicepoc";
     private String ipAddr = findIp();
     private final String status = "UP";
     private final String dataCenterInfo = "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo";
     private final String dataCenterName = "MyOwn";
 
-    public EurekaModelRegistry() throws IOException {
+    public EurekaModelRegistry() {
 
     }
 
@@ -55,16 +56,20 @@ public class EurekaModelRegistry {
         return dataCenterName;
     }
 
-    private String getRandomNumber(){
+    private String getRandomNumber() {
         Random rand = new Random();
         return String.valueOf(rand.nextInt(100));
     }
 
-    private String findIp() throws IOException {
-        Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("google.com", 80));
-        String ip = String.valueOf(socket.getLocalAddress()).substring(1);
-        socket.close();
-        return ip;
+    private String findIp() {
+        try {
+            Socket socket = new Socket();
+            socket.connect(new InetSocketAddress("google.com", 80));
+            String ip = String.valueOf(socket.getLocalAddress()).substring(1);
+            socket.close();
+            return ip;
+        } catch (IOException e) {
+            throw new NotFoundException();
+        }
     }
 }

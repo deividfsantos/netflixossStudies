@@ -1,6 +1,7 @@
 package com.playlistservicepoc.eureka;
 
 
+import com.playlistservicepoc.exception.APINotFoundException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -31,14 +32,10 @@ public class EurekaRegistry implements ApplicationListener<ApplicationReadyEvent
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        try {
             registerApp();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    private void registerApp() throws IOException {
+    private void registerApp(){
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json"),"" +
                 "{\"instance\": {" +
@@ -58,7 +55,11 @@ public class EurekaRegistry implements ApplicationListener<ApplicationReadyEvent
                 " }}}") ;
 
         Request request2 = new Request.Builder().url(url+ eurekaModelRegistry.getAppName()).post(body).build() ;
-        client.newCall(request2).execute() ;
+        try {
+            client.newCall(request2).execute() ;
+        } catch (IOException e) {
+            throw new APINotFoundException();
+        }
     }
 
     private String createHealthUrl(){

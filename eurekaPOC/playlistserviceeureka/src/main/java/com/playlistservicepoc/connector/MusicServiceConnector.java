@@ -1,42 +1,32 @@
 package com.playlistservicepoc.connector;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.playlistservicepoc.exception.APINotFoundException;
 import com.playlistservicepoc.model.MusicModel;
+import com.playlistservicepoc.parse.Parser;
 import okhttp3.*;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
 public class MusicServiceConnector {
 
     @Autowired
     OkHttpClient client;
 
-    public MusicModel run(String url) throws IOException, ParseException {
+    @Autowired
+    Parser parser;
 
-        String jsonString = getJson(url);
-
-        Gson gson = new GsonBuilder().create();
-        MusicModel musicModel = new MusicModel();
-
-        return musicModel = gson.fromJson(jsonString, MusicModel.class);
-    }
-
-    private String getJson(String url) throws IOException {
+    public MusicModel run(String url) {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        Response responses = null;
-
         try {
-            responses = client.newCall(request).execute();
-        }catch (IOException e){
-            e.printStackTrace();
+            Response responses = client.newCall(request).execute();
+            return parser.convertJsonToPersonModel(responses.body().string());
+        } catch (IOException e) {
+            throw new APINotFoundException();
         }
-
-        return responses.body().string();
     }
-
 }

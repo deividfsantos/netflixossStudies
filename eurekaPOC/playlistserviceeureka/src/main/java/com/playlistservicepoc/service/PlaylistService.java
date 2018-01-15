@@ -4,47 +4,43 @@ import com.playlistservicepoc.dao.PlaylistDAO;
 import com.playlistservicepoc.eureka.EurekaDiscovery;
 import com.playlistservicepoc.eureka.EurekaModelDiscover;
 import com.playlistservicepoc.model.PlaylistModel;
-import org.codehaus.jettison.json.JSONException;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.playlistservicepoc.connector.MusicServiceConnector;
 import com.playlistservicepoc.model.MusicModel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaylistService {
 
-    private MusicServiceConnector musicServiceConnector = new MusicServiceConnector();
+    @Autowired
+    private MusicServiceConnector musicServiceConnector;
 
     @Autowired
     private PlaylistDAO playlistDAO;
 
-    private EurekaDiscovery eurekaDiscovery = new EurekaDiscovery();
+    @Autowired
+    private EurekaDiscovery eurekaDiscovery;
 
-    public List<MusicModel> findAllMusics(String name) throws IOException, ParseException, JSONException {
-
-        PlaylistModel playlistModel = playlistDAO.getPlayListByName(name);
-        List<MusicModel> musicModels = new ArrayList<>();
-
-        for (int i = 0; i < playlistModel.getMusicsId().size(); i++) {
-            musicModels.add(findAllMusicsOnPlaylist(playlistModel.getMusicsId().get(i)));
-        }
-
-        return musicModels;
+    public List<MusicModel> findAllMusics(String name) {
+        return playlistDAO
+                .getPlayListByName(name)
+                .getMusicsId()
+                .stream()
+                .map(id -> { return findOneMusicOnPlaylist(id); })
+                .collect(Collectors.toList());
     }
 
-    public MusicModel findAllMusicsOnPlaylist(int musicId) throws IOException, ParseException, JSONException {
+    public MusicModel findOneMusicOnPlaylist(int musicId) {
 
         List<EurekaModelDiscover> eurekaModelDiscoverList = eurekaDiscovery.getUrlFromMusicService();
-        String url = eurekaModelDiscoverList.get(0).getIpAddr()+":"+eurekaModelDiscoverList.get(0).getPort();
 
+        String url = eurekaModelDiscoverList.get(0).getIpAddr() + ":" + eurekaModelDiscoverList.get(0).getPort();
 
-        return musicServiceConnector.run("http://"+url+ "/music/v1/" + musicId);
+        return musicServiceConnector.run("http://" + url + "/music/v1/" + musicId);
     }
-
 
 }

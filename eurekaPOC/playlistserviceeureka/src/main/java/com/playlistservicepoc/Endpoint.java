@@ -44,7 +44,7 @@ public class Endpoint {
     @RequestMapping(value = "/full/{playListName}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MusicModel> getFullPlaylist(@PathVariable(value = "playListName") String playListName) throws IOException, ParseException, JSONException {
+    public List<MusicModel> getFullPlaylist(@PathVariable(value = "playListName") String playListName){
         return playlistService.findAllMusics(playListName);
     }
 
