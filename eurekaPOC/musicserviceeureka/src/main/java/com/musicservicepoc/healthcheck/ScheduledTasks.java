@@ -21,17 +21,16 @@ public class ScheduledTasks {
     @Autowired
     OkHttpClient client;
 
-    private final String url = "http://localhost:8080/eureka/v2/apps/musicservice/";
+    private final static String URL = "http://localhost:8080/eureka/v2/apps/musicservice/";
 
-    public ScheduledTasks() throws UnknownHostException {
-    }
+    private final static String MEDIA_TYPE =  "application/json";
 
     @Scheduled(fixedRate = 1000)
     public void reportCurrentTime() throws IOException {
 
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"),"");
+        RequestBody body = RequestBody.create(MediaType.parse(MEDIA_TYPE),"");
 
-        Request request = new Request.Builder().url(url+eurekaModelRegistry.getHostName()).put(body).build() ;
+        Request request = new Request.Builder().url(URL+eurekaModelRegistry.getHostName()).put(body).build() ;
         client.newCall(request).execute();
 
 
