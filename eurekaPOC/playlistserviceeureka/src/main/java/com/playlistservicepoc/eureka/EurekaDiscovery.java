@@ -20,17 +20,17 @@ public class EurekaDiscovery {
     @Autowired
     OkHttpClient client;
 
-    private final String eurekaAppId = " http://localhost:8080/eureka/v2/apps/musicservice";
+    private final static String EUREKA_APP_ID = " http://localhost:8080/eureka/v2/apps/musicservice";
 
-    private final String headerKey = "Accept";
+    private final static String HEADER_KEY = "Accept";
 
-    private final String headerValue = "application/json";
+    private final static String HEADER_VALUE = "application/json";
 
 
     public List<EurekaModelDiscover> getUrlFromMusicService(){
         Request request = new Request.Builder()
-                .url(eurekaAppId)
-                .addHeader(headerKey,headerValue)
+                .url(EUREKA_APP_ID)
+                .addHeader(HEADER_KEY, HEADER_VALUE)
                 .build();
         try {
             Response responses = client.newCall(request).execute();

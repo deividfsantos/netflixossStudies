@@ -30,7 +30,7 @@ public class PlaylistService {
                 .getPlayListByName(name)
                 .getMusicsId()
                 .stream()
-                .map(id -> { return findOneMusicOnPlaylist(id); })
+                .map(id -> findOneMusicOnPlaylist(id))
                 .collect(Collectors.toList());
     }
 
