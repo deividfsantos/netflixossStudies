@@ -1,6 +1,7 @@
 package com.ribbon.poc;
 
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -28,23 +29,22 @@ public class URLConnectionLoadBalancer {
     }
 
     public String call(final String path) throws Exception {
-
         return LoadBalancerCommand.<String>builder()
                 .withLoadBalancer(loadBalancer)
                 .build()
-                .submit(new ServerOperation<String>() {
-                    @Override
-                    public Observable<String> call(Server server) {
-                        URL url;
-                        try {
-                            url = new URL("http://" + server.getHost() + ":" + server.getPort() + path);
-                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                            return Observable.just(conn.getResponseMessage());
-                        } catch (Exception e) {
-                            return Observable.error(e);
-                        }
+                .submit(server -> {
+                    try {
+                        URL url = getUrl(server, path);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        return Observable.just(conn.getResponseMessage());
+                    } catch (Exception e) {
+                        return Observable.error(e);
                     }
                 }).toBlocking().first();
+    }
+
+    private URL getUrl(Server server, String path) throws MalformedURLException {
+        return new URL("http://" + server.getHost() + ":" + server.getPort() + path);
     }
 
     public LoadBalancerStats getLoadBalancerStats() {
