@@ -1,6 +1,5 @@
 package com.personservice.poc;
 
-import com.personservice.poc.connector.AddressServiceConnector;
 import com.personservice.poc.model.contract.PersonContract;
 import com.personservice.poc.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class Endpoint {
 
     @Autowired
     PersonService personService;
-
-    AddressServiceConnector addressServiceConnector = new AddressServiceConnector();
-
 
     @RequestMapping(value = "/",
             method = RequestMethod.GET,

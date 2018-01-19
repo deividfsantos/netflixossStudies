@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
@@ -18,13 +19,11 @@ public class PersonService {
     PersonDAO personDAO;
 
     public List<PersonContract> getAllPersons(){
-
-        List<PersonContract> personContracts = new ArrayList<>();
-        for (int i = 0; i < personDAO.getPersonModels().size(); i++) {
-            personContracts.add(getPersonContract(personDAO.getPersonModels().get(i)));
-        }
-
-        return personContracts;
+        return personDAO
+                .getPersonModels()
+                .stream()
+                .map(personModel -> getPersonContract(personModel))
+                .collect(Collectors.toList());
     }
 
     public PersonContract getPersonById(int id) {
